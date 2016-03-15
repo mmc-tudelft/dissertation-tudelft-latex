@@ -44,7 +44,8 @@
 \fi
 \RequirePackage{lettrine}
 \RequirePackage{metalogo}
-\RequirePackage[sectionbib,numbers,sort&compress]{natbib}
+%\RequirePackage[sectionbib,numbers,sort&compress]{natbib}
+\RequirePackage[sort&compress]{natbib}
 \RequirePackage{tikz}
 \RequirePackage[noindentafter]{titlesec}
 \RequirePackage{titletoc}
@@ -139,28 +140,33 @@
 %% Use TU Delft cyan as the color for titles, unless the 'print' option is
 %% specified, in which case we use anthracite, a dark gray, which is also used
 %% for the thumb indices.
+%% [ADAPTATION]: always use anthracite
 \definecolor{anthracite}{cmyk}{0,0,0,0.8}
 \if@print
-    \colorlet{title}{anthracite}
+    \colorlet{title}{tudelft-black}
+%\else
+%    \colorlet{title}{tudelft-cyan}
 \else
-    \colorlet{title}{tudelft-cyan}
+    \colorlet{title}{tudelft-black}
 \fi
 \colorlet{thumb}{anthracite}
 
 %% Set the paper size to 17 by 24 cm, approximately halfway between A4 and A5.
 \if@print
     %% In print mode we add a 3 mm bleed on the outside of the page.
+	%% [ADAPTATION]: bleed changed to 5 mm bleed
     \geometry{
-        papersize = {173mm,246mm},
-        layoutsize = {167mm,240mm},
-        layoutoffset = {3mm,3mm},
-        bindingoffset = -3mm
+        papersize = {180mm,250mm},
+        layoutsize = {170mm,240mm},
+        layoutoffset = {5mm,5mm},
+        %bindingoffset = -5mm
     }
 \else
     \geometry{papersize={170mm,240mm}}
 \fi
 %% We decrease the margins slightly from the default (scale = 0.7).
-\geometry{hscale=0.75,vscale=0.8}
+%% [ADAPTATION]: larger top and left margins
+\geometry{hscale=0.75,vscale=0.8,top=2.5cm,left=2cm}
 
 %% Redefine the title command to accept an optional subtitle.
 \renewcommand*\title[2][]{%
@@ -190,23 +196,24 @@
     \fi%
 }
 
+%% [ADAPTATION]: crop marks are better spaced now
 \if@print%
     \newcommand*\cropmarks{%
-        \ifodd\c@page%
+        %\ifodd\c@page%
             \begin{tikzpicture}[remember picture,overlay]
-                \draw ($(current page.north east)+(0mm,-3mm)$) -- ($(current page.north east)+(-2mm,-3mm)$);
-                \draw ($(current page.north east)+(-3mm,0mm)$) -- ($(current page.north east)+(-3mm,-2mm)$);
-                \draw ($(current page.south east)+(0mm,3mm)$) -- ($(current page.south east)+(-2mm,3mm)$);
-                \draw ($(current page.south east)+(-3mm,0mm)$) -- ($(current page.south east)+(-3mm,2mm)$);
+                \draw ($(current page.north east)+(0mm,-5mm)$) -- ($(current page.north east)+(-2mm,-5mm)$);
+                \draw ($(current page.north east)+(-5mm,0mm)$) -- ($(current page.north east)+(-5mm,-2mm)$);
+                \draw ($(current page.south east)+(0mm,5mm)$) -- ($(current page.south east)+(-2mm,5mm)$);
+                \draw ($(current page.south east)+(-5mm,0mm)$) -- ($(current page.south east)+(-5mm,2mm)$);
+        %    \end{tikzpicture}%
+        %\else%
+        %    \begin{tikzpicture}[remember picture,overlay]
+                \draw ($(current page.north west)+(0mm,-5mm)$) -- ($(current page.north west)+(2mm,-5mm)$);
+                \draw ($(current page.north west)+(5mm,0mm)$) -- ($(current page.north west)+(5mm,-2mm)$);
+                \draw ($(current page.south west)+(0mm,5mm)$) -- ($(current page.south west)+(2mm,5mm)$);
+                \draw ($(current page.south west)+(5mm,0mm)$) -- ($(current page.south west)+(5mm,2mm)$);
             \end{tikzpicture}%
-        \else%
-            \begin{tikzpicture}[remember picture,overlay]
-                \draw ($(current page.north west)+(0mm,-3mm)$) -- ($(current page.north west)+(2mm,-3mm)$);
-                \draw ($(current page.north west)+(3mm,0mm)$) -- ($(current page.north west)+(3mm,-2mm)$);
-                \draw ($(current page.south west)+(0mm,3mm)$) -- ($(current page.south west)+(2mm,3mm)$);
-                \draw ($(current page.south west)+(3mm,0mm)$) -- ($(current page.south west)+(3mm,2mm)$);
-            \end{tikzpicture}%
-        \fi%
+        %\fi%
     }
 \else
     \newcommand*\cropmarks{}
@@ -214,13 +221,14 @@
 
 %%% Thumb indices consist of white text on a rectangular colored background. The
 %%% font-size is 75% of the size of thumb height.
+%% [ADAPTATION]: thumb slightly shifted horizontally to look better on the page
 \newif\ifthumb
 \newlength\thumbheight
 \setlength\thumbheight{24pt}
 \newlength\thumbedge
 \setlength\thumbedge{4pt}
 \newlength\thumbhspace
-\setlength\thumbhspace{36pt}
+\setlength\thumbhspace{31pt}
 \newlength\thumbvspace
 \setlength\thumbvspace{2\thumbheight}
 
@@ -460,11 +468,11 @@
 }
 
 %% Create an unnumbered reference section.
-\addto\captionsenglish{\renewcommand*\bibname{\color{title}References}}
-\newcommand*\references[1]{%
-    \bibliographystyle{dissertation}%
-    \bibliography{#1}%
-}
+%\addto\captionsenglish{\renewcommand*\bibname{\color{title}References}}
+%\newcommand*\references[1]{%
+%    \bibliographystyle{dissertation}%
+%    \bibliography{#1}%
+%}
 
 %% Hyperlinks are cyan, except in print mode, when they are all black.
 \hypersetup{
