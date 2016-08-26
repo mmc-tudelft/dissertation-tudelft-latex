@@ -102,6 +102,8 @@ If multiple people have contributed significantly to this chapter, they can be l
 
 In a dissertation, each chapter has its own list of references. These can be generated with the special command \texttt{\textbackslash references\{dissertation\}} from \texttt{dissertation.bib} at the end of the chapter. Note that this means that you need to run a command like \texttt{bibtex chapter-1/chapter-1} for each chapter. The bibliography style is specified in \texttt{dissertation.bst}, which is a modified version of \texttt{apsrev4-1.bst} (from REVTeX) designed to also display the titles of referenced articles. The template will automatically generate clickable hyperlinks if a URL or DOI (digital object identifier) is present for the reference. Although it is possible to manage the bibliography by hand, we recommend using EndNote (available from Blackboard) or JabRef (available from \url{http://jabref.sourceforge.net/}).
 
+\emph{Note: \texttt{\textbackslash references} has been commented out in \texttt{dissertation.cls}.}
+
 Chapters are subdivided into sections, subsections, subsubsections, and, optionally, paragraphs and subparagraphs. All can have a title, but only sections and subsections are numbered. As with chapters, the numbering can be turned off by using \texttt{\textbackslash section*\{\ldots\}} instead of \texttt{\textbackslash section\{\ldots\}}, and similarly for the subsection.
 \section{\textbackslash section\{\ldots\}}
 \subsection{\textbackslash subsection\{\ldots\}}
@@ -144,5 +146,6 @@ as well as the accent colors
 \item\texttt{\color{tudelft-yellow}tudelft-yellow}.
 \end{itemize}
 
-\references{dissertation}
+% Generally we don't want to have references here.
+%\references{dissertation}
 
