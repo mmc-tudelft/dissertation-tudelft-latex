@@ -16,7 +16,7 @@
 \RequirePackage[dutch,english]{babel}
 \RequirePackage{calc}
 \RequirePackage[nooneline,footnotesize]{caption}
-\RequirePackage{chapterbib}
+%\RequirePackage{chapterbib} % Generally we don't want references per chapter
 \RequirePackage{etaremune}
 \RequirePackage{fancyhdr}
 \RequirePackage[flushmargin,hang]{footmisc}
